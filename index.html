@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tithes Series</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="quiz.css" />
+
+        <style>
+            /* Professional Engaging Spinner */
+            .tab-spinner {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 150px;
+                width: 100%;
+                position: relative;
+            }
+
+            /* Hide the original Font Awesome icon */
+            .tab-spinner i {
+                display: none;
+            }
+
+            /* Main spinner ring */
+            .tab-spinner::before {
+                content: "";
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                border: 3px solid rgba(74, 109, 167, 0.1);
+                border-top: 3px solid #4a6da7;
+                border-right: 3px solid #4a6da7;
+                box-shadow: 0 0 15px rgba(74, 109, 167, 0.1);
+                animation: spinClockwise 1.2s
+                    cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+            }
+
+            .highlight {
+                color: #4a6da7;
+                font-weight: bold;
+                text-decoration: underline;
+            }
+
+            /* Inner spinner ring */
+            .tab-spinner::after {
+                content: "";
+                position: absolute;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 3px solid rgba(74, 109, 167, 0.05);
+                border-bottom: 3px solid #4a6da7;
+                border-left: 3px solid #4a6da7;
+                animation: spinCounterClockwise 1.8s
+                    cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+            }
+
+            /* Create the pulse effect */
+            @keyframes spinClockwise {
+                0% {
+                    transform: rotate(0deg) scale(1);
+                }
+                50% {
+                    transform: rotate(180deg) scale(1.1);
+                    border-top-color: #5b7fbf;
+                    border-right-color: #5b7fbf;
+                    box-shadow: 0 0 20px rgba(74, 109, 167, 0.4);
+                }
+                100% {
+                    transform: rotate(360deg) scale(1);
+                }
+            }
+
+            @keyframes spinCounterClockwise {
+                0% {
+                    transform: rotate(0deg) scale(1);
+                }
+                50% {
+                    transform: rotate(-180deg) scale(1.15);
+                    border-bottom-color: #5b7fbf;
+                    border-left-color: #5b7fbf;
+                }
+                100% {
+                    transform: rotate(-360deg) scale(1);
+                }
+            }
+
+            /* Add a subtle pulsating dot in the center */
+            .tab-spinner .center-dot {
+                position: absolute;
+                width: 12px;
+                height: 12px;
+                background-color: #4a6da7;
+                border-radius: 50%;
+                animation: pulseDot 1.5s ease-in-out infinite;
+            }
+
+            @keyframes pulseDot {
+                0%,
+                100% {
+                    transform: scale(0.7);
+                    opacity: 0.5;
+                }
+                50% {
+                    transform: scale(1);
+                    opacity: 0.8;
+                    box-shadow: 0 0 10px rgba(74, 109, 167, 0.6);
+                }
+            }
+
+            /* Keep your existing fade transition */
+            .tab-content {
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+            }
+
+            .tab-content.active {
+                opacity: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Loading Screen -->
+        <div class="loader-container">
+            <div class="loader-logo">
+                <img src="./logo.png" alt="Sunday School Logo" />
+                <div class="pulse"></div>
+            </div>
+            <div class="ministry-name">Life Gate Ministries Worldwide</div>
+            <div class="loader-text">Loading Sunday School Lesson</div>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="inner-logo-container">
+            <img src="./logo.png" alt="Sunday School Logo" class="logo" />
+        </div>
+
+        <button
+            class="theme-toggle"
+            onclick="toggleTheme()"
+            aria-label="Toggle theme"
+            style="z-index: 99999"
+        >
+            <i class="fas fa-moon"></i>
+        </button>
+
+        <div class="container">
+            <h1>SUNDAY SCHOOL LESSON</h1>
+            <h2>DATE: <span>JUNE 22, 2025</span></h2>
+            <h2>TITHING PART FIVE - THE BENEFITS OF TITHING</h2>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="lessonProgress"></div>
+                </div>
+            </div>
+
+            <!-- Tab Navigation -->
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab('intro')">
+                    Introduction
+                </button>
+                <button class="tab-btn" onclick="openTab('lesson')">
+                    Lesson
+                </button>
+
+                <button class="tab-btn" onclick="openTab('conclusion')">
+                    Conclusion
+                </button>
+                <button class="tab-btn" onclick="openTab('application')">
+                    Application
+                </button>
+
+                <button class="tab-btn" onclick="openTab('quiz')">Quiz</button>
+                <button class="tab-btn" onclick="openTab('prayer')">
+                    Prayer Points
+                </button>
+                <button class="tab-btn" onclick="openTab('assignment')">
+                    Assignment
+                </button>
+            </div>
+
+            <div id="tab-spinner" class="tab-spinner" style="display: none">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+
+            <!-- Tab Contents -->
+            <div id="intro" class="tab-content active">
+                <div class="memory-verse">
+                    <h2>🧠📝 Memory Verse</h2>
+                    <blockquote>
+                        "If ye be willing and obedient, ye shall eat the good of
+                        the land" - Isaiah 1:19 ⚖️📏🔁🪞⚠️
+                        <br />
+                        <button
+                            onclick="showBibleVersions('Isaiah 1:19')"
+                            class="verse-btn"
+                        >
+                            Read in Different Versions
+                        </button>
+                    </blockquote>
+                </div>
+                <h2>Text: Malachi 3:10-12</h2>
+                <blockquote>
+                    <button
+                        onclick="showBibleVersions('Malachi 3:10-12')"
+                        class="verse-btn"
+                    >
+                        Read in Different Versions
+                    </button>
+                </blockquote>
+
+                <h2>Introduction 🧠✨📖</h2>
+                <p>
+                    There are benefits attached to tithing which are only
+                    released as we obey the conditions. God does not contract
+                    people without paying them and He is not a taker but a
+                    giver. The benefis range From spiritual to material and are
+                    open to all. The river does not stop anyone from fetching
+                    water from it, nevertheless only those who fetch enjoy its
+                    numerous benefits.
+                </p>
+
+                <div class="aims-objectives">
+                    <h3>Aims and Objectives 🎯📖💡</h3>
+                    <p>
+                        <strong>Aim:</strong> To arouse the interests of the
+                        Christian believers and to provoke same into investing
+                        in God’s
+                        <em class="highlight">stock exchange market</em>
+                        for maximum benefits. 💭🕊️📖💰🤔
+                    </p>
+
+                    <p>
+                        <strong>Objective:</strong> To see a rich, wealthy and
+                        powerful child of God like Abraham whose life will
+                        reflect God. 🙏💰🌱
+                    </p>
+                </div>
+            </div>
+
+            <div id="lesson" class="tab-content">
+                <h2>Text Review/Lesson 📚✨</h2>
+                <div class="main-text">
+                    <h3>Text: Malachi 3:10-12 🕊️</h3>
+                    <button
+                        onclick="showBibleVersions('Malachi 3:10-12')"
+                        class="verse-btn"
+                    >
+                        📖 Read Malachi 3:10-12
+                    </button>
+                </div>
+
+                <div class="lesson-section">
+                    <h3>Lesson 🧠💡</h3>
+                    <p>
+                        In our text, God has emphatically enumerate some
+                        benefits to those who faithfully tithes their all.
+                        Remember that benefits is a compound of blessings beyond
+                        human comprehension; some blessing are yet not known to
+                        you but are under the benefits. Lets consider them as
+                        they appear in our text.
+                    </p>
+                    <ol class="scripture-list">
+                        <li>
+                            <p>
+                                <em
+                                    ><b
+                                        ><u
+                                            >I will open the windows of heaven
+                                            to you:</u
+                                        ></b
+                                    ></em
+                                ><br />This is a visitor's visa/permit to heaven
+                                as aften as you want. Someday we will have a
+                                permanent's resident permit (door of heaven) but
+                                before then tithes create a temporary access
+                                (window of heaven).
+                            </p>
+
+                            <div class="verse-buttons">
+                                <button
+                                    onclick="showBibleVersions('Malachi 3:10')"
+                                    class="verse-btn"
+                                >
+                                    📖 Malachi 3:10
+                                </button>
+                            </div>
+                        </li>
+                        <li>
+                            <p>
+                                <em
+                                    ><b
+                                        ><u
+                                            >I will pour you out a blessing,
+                                            that there shall be
+                                            <b>no room enough</b> to receive it
+                                        </u></b
+                                    ></em
+                                >: The words <em><b>a blessing</b></em> means
+                                that it is only God determines the prticular
+                                blessing that will soothe you. The word
+                                <em><b>particulat</b></em> means giving without
+                                reservation and that is why receiving it will
+                                become a problem since
+                                <b>storage facility lack</b> will arise.
+                            </p>
+
+                            <div class="verse-buttons">
+                                <button
+                                    onclick="showBibleVersions('Malachi 3:10')"
+                                    class="verse-btn"
+                                >
+                                    📖 Malachi 3:10
+                                </button>
+                            </div>
+                        </li>
+                        <li>
+                            <p>
+                                <em
+                                    ><b
+                                        ><u
+                                            >I will rebuke the devourer for your
+                                            sakes:</u
+                                        ></b
+                                    ></em
+                                ><br />It means anything that ries to eat you or
+                                your family up physically, spiritually,
+                                fiancially, bodily, etc; will be stopped. There
+                                shall not be prematurity concerning you. No
+                                failure, miscarriage, disappointment, unfinished
+                                transaction, redundancy, loss of job, etc.
+                            </p>
+
+                            <div class="verse-buttons">
+                                <button
+                                    onclick="showBibleVersions('Malachi 3:11')"
+                                    class="verse-btn"
+                                >
+                                    📖 Malachi 3:11
+                                </button>
+                            </div>
+                        </li>
+                        <li>
+                            <p>
+                                <em
+                                    ><b
+                                        ><u
+                                            >All the people of God’s creation
+                                            will recognize God's blessing in
+                                            your life
+                                        </u></b
+                                    ></em
+                                ><br />You will become a centre of attraction.
+                            </p>
+
+                            <div class="verse-buttons">
+                                <button
+                                    onclick="showBibleVersions('Malachi 3:12')"
+                                    class="verse-btn"
+                                >
+                                    📖 Malachi 3:12
+                                </button>
+                            </div>
+                        </li>
+                        <li>
+                            <p>
+                                <em
+                                    ><b
+                                        ><u
+                                            >There will be no lack of means of
+                                            in God's house on earth:
+                                        </u></b
+                                    ></em
+                                ><br />There will be effective and unhindered
+                                pursuit of God's agenda.
+                            </p>
+
+                            <div class="verse-buttons">
+                                <button
+                                    onclick="showBibleVersions('2 Corinthians 9:8')"
+                                    class="verse-btn"
+                                >
+                                    📖 2 Corinthians 9:8
+                                </button>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div id="application" class="tab-content">
+                <h2>Personal Application</h2>
+                <div class="reflection-section">
+                    <div class="interactive-cards">
+                        <!-- Understanding Check -->
+                        <div class="reflection-card">
+                            <h3>Understanding Benefits of Tithing</h3>
+                            <div class="love-meter">
+                                <p>
+                                    How well do you understand the benefits of
+                                    tithing we studied?
+                                </p>
+                                <div class="rating-container">
+                                    <input
+                                        type="range"
+                                        min="1"
+                                        max="10"
+                                        value="5"
+                                        class="love-slider"
+                                        id="titheRating"
+                                    />
+                                    <span class="rating-value">5/10</span>
+                                </div>
+                                <div class="rating-feedback"></div>
+                            </div>
+                        </div>
+
+                        <!-- Action Plan -->
+                        <div class="reflection-card">
+                            <h3>Action Plan for Receiving Tithing Benefits</h3>
+                            <div class="action-items">
+                                <div class="action-item">
+                                    <input type="checkbox" id="action1" />
+                                    <label for="action1"
+                                        >Start giving tithes faithfully</label
+                                    >
+                                </div>
+                                <div class="action-item">
+                                    <input type="checkbox" id="action2" />
+                                    <label for="action2"
+                                        >Trust God's promise of open
+                                        heavens</label
+                                    >
+                                </div>
+                                <div class="action-item">
+                                    <input type="checkbox" id="action3" />
+                                    <label for="action3"
+                                        >Expect God's rebuke of the
+                                        devourer</label
+                                    >
+                                </div>
+                                <button class="add-action-btn">
+                                    Add Personal Action
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reflection Journal -->
+                    <div class="reflection-journal">
+                        <h3>Reflection Journal</h3>
+                        <div class="journal-prompts">
+                            <div class="prompt active">
+                                <p>
+                                    Which benefit of tithing speaks to you most
+                                    and why?
+                                </p>
+                                <textarea
+                                    class="reflection-input"
+                                    placeholder="Write your thoughts here..."
+                                ></textarea>
+                            </div>
+                            <div class="prompt-nav">
+                                <button class="prev-prompt" disabled>
+                                    <i class="fas fa-arrow-left"></i>
+                                </button>
+                                <span class="prompt-counter">1/3</span>
+                                <button class="next-prompt">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Commitment Section -->
+                    <div class="commitment-section">
+                        <h3>Personal Commitment</h3>
+                        <div class="commitment-form">
+                            <p>
+                                Based on the benefits of tithing, I commit to:
+                            </p>
+                            <input
+                                type="text"
+                                class="commitment-input"
+                                placeholder="e.g., Faithfully bringing my tithes to receive God's blessings..."
+                            />
+                            <button class="save-commitment">
+                                Make Commitment
+                            </button>
+                        </div>
+                        <div class="saved-commitments">
+                            <h4>My Tithing Commitments</h4>
+                            <ul class="commitment-list"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="conclusion" class="tab-content">
+                <h2>Conclusion 📜</h2>
+                <p>
+                    Every man wants his children to have and be the best, how
+                    much more God - Matthew 7:11. His intention is to showcase
+                    us in order to attract u to himself that his creatures may
+                    not be lost. If you faithfully pay your tithes, God is more
+                    than faithful to perform HIs word towards you.
+                </p>
+            </div>
+
+            <link rel="stylesheet" href="theme.css" />
+            <div id="quiz" class="tab-content">
+                <div class="quiz-container">
+                    <h3>Speed Quiz Challenge 🎯</h3>
+                    <div class="speed-quiz-container">
+                        <div class="quiz-stats">
+                            <div class="timer">
+                                ⏱️ Time: <span id="timer">50</span>s
+                            </div>
+                            <div class="score">
+                                Score: <span id="speed-score">0</span>
+                            </div>
+                        </div>
+                        <div id="question-container" class="question-display">
+                            <h4 style="color: green">Get Ready!</h4>
+                            <p style="color: green">
+                                Answer quickly for bonus points!
+                            </p>
+                        </div>
+
+                        <div class="answer-buttons">
+                            <button class="speed-btn" onclick="checkAnswer(0)">
+                                A
+                            </button>
+                            <button class="speed-btn" onclick="checkAnswer(1)">
+                                B
+                            </button>
+                            <button class="speed-btn" onclick="checkAnswer(2)">
+                                C
+                            </button>
+                            <button class="speed-btn" onclick="checkAnswer(3)">
+                                D
+                            </button>
+                        </div>
+
+                        <div class="controls">
+                            <button
+                                onclick="startSpeedQuiz()"
+                                class="start-btn"
+                            >
+                                Start Quiz
+                            </button>
+                            <button
+                                onclick="resetSpeedQuiz()"
+                                class="reset-btn"
+                            >
+                                Reset
+                            </button>
+                        </div>
+
+                        <div id="feedback" class="feedback"></div>
+                    </div>
+                </div>
+
+                <style>
+                    .quiz-container {
+                        padding: 15px;
+                        max-width: 100%;
+                    }
+
+                    .quiz-stats {
+                        display: flex;
+                        justify-content: space-between;
+                        flex-wrap: wrap;
+                        gap: 10px;
+                        margin-bottom: 15px;
+                        font-size: 16px;
+                    }
+
+                    .question-display {
+                        margin: 15px 0;
+                        padding: 10px;
+                        border-radius: 8px;
+                        background: #f5f5f5;
+                        word-wrap: break-word;
+                    }
+
+                    .answer-buttons {
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 10px;
+                        margin: 15px 0;
+                    }
+
+                    .speed-btn {
+                        padding: 12px;
+                        font-size: 16px;
+                        border-radius: 8px;
+                        border: 2px solid #4a6da7;
+                        /* background: white; */
+                        min-height: 44px;
+                        touch-action: manipulation;
+                    }
+
+                    .controls {
+                        display: flex;
+                        gap: 10px;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                    }
+
+                    .start-btn,
+                    .reset-btn {
+                        padding: 12px 24px;
+                        font-size: 16px;
+                        border-radius: 8px;
+                        min-width: 120px;
+                        touch-action: manipulation;
+                    }
+
+                    .badge {
+                        padding: 8px 16px;
+                        margin: 10px 0;
+                        width: 100%;
+                        text-align: center;
+                        font-size: 14px;
+                    }
+
+                    .performance-chart-container {
+                        width: 100%;
+                        max-width: 100%;
+                        overflow-x: auto;
+                        margin-top: 15px;
+                    }
+
+                    @media (max-width: 480px) {
+                        .quiz-stats {
+                            font-size: 14px;
+                        }
+
+                        .speed-btn {
+                            padding: 10px;
+                            font-size: 14px;
+                        }
+
+                        .start-btn,
+                        .reset-btn {
+                            padding: 10px 20px;
+                            font-size: 14px;
+                            min-width: 100px;
+                        }
+                    }
+                </style>
+
+                <!-- Rest of your quiz JavaScript code remains the same -->
+                <script>
+                    // ... (keep all existing code until endQuiz function) ...
+                    const speedQuestions = [
+                        {
+                            q: "What will God open according to Malachi 3:10?",
+                            a: [
+                                "Windows of heaven",
+                                "Gates of blessing",
+                                "Doors of prosperity",
+                                "Fountains of wealth",
+                            ],
+                            correct: 0,
+                        },
+                        {
+                            q: "Who will God rebuke for your sake?",
+                            a: [
+                                "The enemy",
+                                "The devourer",
+                                "The wicked",
+                                "The thief",
+                            ],
+                            correct: 1,
+                        },
+                        {
+                            q: "When you tithe faithfully, your land will be called...",
+                            a: ["Delightsome", "Prosperous", "Blessed", "Holy"],
+                            correct: 0,
+                        },
+                        {
+                            q: "What does God challenge us to do in Malachi 3:10?",
+                            a: [
+                                "Pray more",
+                                "Give more",
+                                "Test/Prove Him",
+                                "Fast longer",
+                            ],
+                            correct: 2,
+                        },
+                        {
+                            q: "What will happen to your vine according to Malachi 3:11?",
+                            a: [
+                                "It will wither",
+                                "It will not cast fruit",
+                                "It will grow taller",
+                                "It will die",
+                            ],
+                            correct: 1,
+                        },
+                        {
+                            q: "Who will call you blessed according to Malachi 3:12?",
+                            a: [
+                                "Your family",
+                                "Your church",
+                                "All nations",
+                                "Your neighbors",
+                            ],
+                            correct: 2,
+                        },
+                        {
+                            q: "What should be brought into the storehouse?",
+                            a: [
+                                "All the tithes",
+                                "Some offerings",
+                                "Extra money",
+                                "Food items",
+                            ],
+                            correct: 0,
+                        },
+                        {
+                            q: "Where should tithes be brought?",
+                            a: ["Bank", "Home", "Storehouse", "Market"],
+                            correct: 2,
+                        },
+                        {
+                            q: "What will there be in God's house when we tithe?",
+                            a: ["Gold", "Meat/Food", "Silver", "Oil"],
+                            correct: 1,
+                        },
+                        {
+                            q: "What kind of land will you be according to Malachi 3:12?",
+                            a: [
+                                "Wealthy land",
+                                "Holy land",
+                                "Delightful land",
+                                "Blessed land",
+                            ],
+                            correct: 2,
+                        },
+                    ];
+
+                    let currentQuestion = 0;
+                    let timeLeft = 100;
+                    let timer;
+                    let score = 0;
+                    let isQuizActive = false;
+                    let questionResults = [];
+
+                    // ... other functions stay the same until endQuiz() ...
+                    function getPerformanceBadge(score) {
+                        // Changed to use score instead of percentage
+                        if (score >= 150) {
+                            return `<div class="badge gold">
+                                    <i class="fas fa-crown"></i>
+                                    <span>Grand Master of Tithing</span>
+                                </div>`;
+                        } else if (score >= 100) {
+                            return `<div class="badge silver">
+                                    <i class="fas fa-star"></i>
+                                    <span>Tithing Expert</span>
+                                </div>`;
+                        } else if (score >= 50) {
+                            return `<div class="badge bronze">
+                                    <i class="fas fa-award"></i>
+                                    <span>Tithing Scholar</span>
+                                </div>`;
+                        } else if (score >= 30) {
+                            return `<div class="badge beginner">
+                                    <i class="fas fa-seedling"></i>
+                                    <span>Tithing Student</span>
+                                </div>`;
+                        }
+                        return `<div class="badge beginner">
+                                <i class="fas fa-child"></i>
+                                <span>Tithing Beginner</span>
+                            </div>`;
+                    }
+
+                    function startSpeedQuiz() {
+                        if (isQuizActive) return;
+                        isQuizActive = true;
+                        score = 0;
+                        timeLeft = 50;
+                        currentQuestion = 0;
+                        questionResults = [];
+                        document.getElementById("speed-score").textContent =
+                            score;
+                        showQuestion();
+                        startTimer();
+                    }
+
+                    function showQuestion() {
+                        if (currentQuestion >= speedQuestions.length) {
+                            endQuiz();
+                            return;
+                        }
+                        const q = speedQuestions[currentQuestion];
+                        document.getElementById(
+                            "question-container"
+                        ).innerHTML = `
+                                <h4>Question ${currentQuestion + 1} of ${
+                            speedQuestions.length
+                        }:</h4>
+                                <p>${q.q}</p>
+                            `;
+                        document
+                            .querySelectorAll(".speed-btn")
+                            .forEach((btn, i) => {
+                                btn.textContent = q.a[i];
+                            });
+                    }
+
+                    function checkAnswer(choice) {
+                        if (!isQuizActive) return;
+                        const correct =
+                            speedQuestions[currentQuestion].correct === choice;
+                        const timebonus = Math.floor(timeLeft / 10);
+                        const pointsEarned = correct ? 10 + timebonus : 0;
+
+                        questionResults.push({
+                            question: currentQuestion + 1,
+                            correct: correct,
+                            points: pointsEarned,
+                            timeBonus: timebonus,
+                        });
+
+                        if (correct) {
+                            score += pointsEarned;
+                        }
+
+                        const feedback = document.getElementById("feedback");
+                        feedback.textContent = correct
+                            ? `Correct! +${pointsEarned} points`
+                            : "Wrong! Try the next question";
+                        feedback.className = `feedback ${
+                            correct ? "correct" : "wrong"
+                        }`;
+
+                        document.getElementById("speed-score").textContent =
+                            score;
+                        currentQuestion++;
+                        setTimeout(() => {
+                            feedback.textContent = "";
+                            showQuestion();
+                        }, 1000);
+                    }
+
+                    function startTimer() {
+                        timer = setInterval(() => {
+                            timeLeft--;
+                            document.getElementById("timer").textContent =
+                                timeLeft;
+                            if (timeLeft <= 0) endQuiz();
+                        }, 1000);
+                    }
+
+                    function createPerformanceChart() {
+                        const ctx = document.createElement("canvas");
+                        ctx.id = "performanceChart";
+                        ctx.style.marginTop = "20px";
+                        // Set minimum height for mobile
+                        ctx.style.minHeight = "300px"; // Added minimum height
+
+                        const labels = questionResults.map(
+                            (r) => `Q${r.question}`
+                        );
+                        const pointsData = questionResults.map((r) => r.points);
+                        const backgroundColors = questionResults.map(
+                            (r) =>
+                                r.correct
+                                    ? "rgba(75, 192, 192, 0.6)"
+                                    : "rgba(255, 0, 0, 0.6)" // Changed to pure red
+                        );
+                        const borderColors = questionResults.map(
+                            (r) =>
+                                r.correct
+                                    ? "rgba(75, 192, 192, 1)"
+                                    : "rgba(255, 0, 0, 1)" // Changed to pure red
+                        );
+
+                        new Chart(ctx, {
+                            type: "bar",
+                            data: {
+                                labels: labels,
+                                datasets: [
+                                    {
+                                        label: "Points per Question",
+                                        data: pointsData,
+                                        backgroundColor: backgroundColors,
+                                        borderColor: borderColors,
+                                        borderWidth: 1,
+                                    },
+                                ],
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                aspectRatio: 1,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        title: {
+                                            display: true,
+                                            text: "Points",
+                                        },
+                                    },
+                                    x: {
+                                        title: {
+                                            display: true,
+                                            text: "Questions",
+                                        },
+                                    },
+                                },
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: "Performance Breakdown",
+                                    },
+                                    legend: {
+                                        display: false,
+                                    },
+                                },
+                            },
+                        });
+                        return ctx;
+                    }
+
+                    function endQuiz() {
+                        isQuizActive = false;
+                        clearInterval(timer);
+                        const questionsAttempted = currentQuestion;
+                        const correctAnswers = questionResults.filter(
+                            (r) => r.correct
+                        ).length;
+                        const scorePercentage = Math.round(
+                            (correctAnswers / speedQuestions.length) * 100
+                        );
+
+                        const container =
+                            document.getElementById("question-container");
+                        container.innerHTML = `
+                            <h4>Quiz Complete!</h4>
+                            ${getPerformanceBadge(score)}
+                            <p>Questions Attempted: ${questionsAttempted} of ${
+                            speedQuestions.length
+                        }</p>
+                            <p>Final Score: ${score} points</p>
+                            <p>Performance: ${scorePercentage}%</p>
+                            <p>Time Remaining: ${timeLeft}s</p>
+                            <p>${getScoreMessage(score)}</p>
+                            
+                            <div class="share-buttons">
+                                <button onclick="shareToWhatsApp()" class="share-btn whatsapp">
+                                    <i class="fab fa-whatsapp"></i> Share to WhatsApp
+                                </button>
+                                <button onclick="shareToFacebook()" class="share-btn facebook">
+                                    <i class="fab fa-facebook"></i> Share to Facebook
+                                </button>
+                            </div>
+
+                            <div class="performance-chart-container"></div>
+                        `;
+
+                        container
+                            .querySelector(".performance-chart-container")
+                            .appendChild(createPerformanceChart());
+
+                        // Add styles for share buttons
+                        const style = document.createElement("style");
+                        style.textContent = `
+                            .share-buttons {
+                                display: flex;
+                                gap: 10px;
+                                margin: 15px 0;
+                                justify-content: center;
+                            }
+                            .share-btn {
+                                padding: 10px 20px;
+                                border: none;
+                                border-radius: 5px;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                gap: 8px;
+                                color: white;
+                                font-size: 14px;
+                            }
+                            .whatsapp {
+                                background-color: #25D366;
+                            }
+                            .facebook {
+                                background-color: #1877F2;
+                            }
+                        `;
+                        document.head.appendChild(style);
+                    }
+
+                    function shareToWhatsApp() {
+                        const text = `🎯 Bible Quiz Result!\n
+                📊 My Score: ${score} points\n
+                ⭐ Performance: ${Math.round(
+                    (questionResults.filter((r) => r.correct).length /
+                        speedQuestions.length) *
+                        100
+                )}%\n
+                🎮 Try the quiz yourself at: ${window.location.href}`;
+
+                        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
+                            text
+                        )}`;
+                        window.open(whatsappUrl, "_blank");
+                    }
+
+                    function shareToFacebook() {
+                        const text = `I scored ${score} points in the Bible Quiz! Can you beat my score?`;
+                        const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                            window.location.href
+                        )}&quote=${encodeURIComponent(text)}`;
+                        window.open(fbUrl, "_blank", "width=600,height=400");
+                    }
+
+                    // ... (keep remaining functions the same) ...
+                    function getScoreMessage(score) {
+                        if (score >= 150) {
+                            return "Outstanding! You have excellent knowledge of tithing principles!";
+                        } else if (score >= 100) {
+                            return "Great work! You understand tithing concepts well!";
+                        } else if (score >= 50) {
+                            return "Good effort! Keep studying to improve your understanding.";
+                        } else if (score >= 30) {
+                            return "Keep learning! Review the lesson materials for better understanding.";
+                        }
+                        return "Don't give up! Review the lesson and try again.";
+                    }
+
+                    function resetSpeedQuiz() {
+                        isQuizActive = false;
+                        clearInterval(timer);
+                        score = 0;
+                        timeLeft = 50;
+                        currentQuestion = 0;
+                        questionResults = [];
+                        document.getElementById("speed-score").textContent =
+                            "0";
+                        document.getElementById("timer").textContent = "50";
+                        document.getElementById("feedback").textContent = "";
+                        document.getElementById(
+                            "question-container"
+                        ).innerHTML = `
+                                <h4 style="color:green">Get Ready!</h4>
+                                <p style="color:green">Answer quickly for bonus points!</p>
+                            `;
+                    }
+
+                    // Initialize quiz on page load
+                    document.addEventListener("DOMContentLoaded", () => {
+                        resetSpeedQuiz();
+                    });
+                </script>
+            </div>
+
+            <link rel="stylesheet" href="prayer.css" />
+
+            <div id="prayer" class="tab-content">
+                <h2>Prayer Points - Tithing Benefits</h2>
+
+                <div class="prayer-section">
+                    <div class="prayer-points">
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Father, You promised to rebuke the devourer for
+                                our sake when we tithe. I pray for Your Super
+                                Harvest blessing over all that concerns me and
+                                my family.
+                            </div>
+                        </div>
+
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Lord, give me grace to be faithful in tithing so
+                                that I will experience Excellent Manifestation
+                                of Your promises in every area of my life.
+                            </div>
+                        </div>
+
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Thank You for Your promise that all nations will
+                                call us blessed when we honor You with our
+                                tithes. Let my life demonstrate Your blessing to
+                                others.
+                            </div>
+                        </div>
+
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Holy Spirit, help me trust in Your promise of
+                                abundant provision when I bring the whole tithe
+                                into Your storehouse. Remove all doubt and fear
+                                from my heart.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="assignment" class="tab-content">
+                <h2>Weekly Assignment</h2>
+
+                <div class="assignment-container">
+                    <!-- Chart Container -->
+                    <div class="assignment-card">
+                        <h3>Tithing Progress Chart</h3>
+                        <div class="chart-container">
+                            <canvas id="tithingChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="assignment-card">
+                        <h3>Practical Application</h3>
+                        <div class="task">
+                            <p>
+                                Track your tithing for the next month using this
+                                interactive checklist:
+                            </p>
+                            <div class="tithe-tracker">
+                                <div class="track-item">
+                                    <input
+                                        type="checkbox"
+                                        id="week1"
+                                        onchange="updateProgress()"
+                                    />
+                                    <label for="week1">Week 1 Tithe</label>
+                                    <input
+                                        type="date"
+                                        class="date-input"
+                                        onchange="updateChart()"
+                                    />
+                                </div>
+                                <div class="track-item">
+                                    <input
+                                        type="checkbox"
+                                        id="week2"
+                                        onchange="updateProgress()"
+                                    />
+                                    <label for="week2">Week 2 Tithe</label>
+                                    <input
+                                        type="date"
+                                        class="date-input"
+                                        onchange="updateChart()"
+                                    />
+                                </div>
+                                <div class="track-item">
+                                    <input
+                                        type="checkbox"
+                                        id="week3"
+                                        onchange="updateProgress()"
+                                    />
+                                    <label for="week3">Week 3 Tithe</label>
+                                    <input
+                                        type="date"
+                                        class="date-input"
+                                        onchange="updateChart()"
+                                    />
+                                </div>
+                                <div class="track-item">
+                                    <input
+                                        type="checkbox"
+                                        id="week4"
+                                        onchange="updateProgress()"
+                                    />
+                                    <label for="week4">Week 4 Tithe</label>
+                                    <input
+                                        type="date"
+                                        class="date-input"
+                                        onchange="updateChart()"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="assignment-card">
+                        <h3>Scripture Study</h3>
+                        <div class="scripture-study">
+                            <p>
+                                Read and reflect on these passages about
+                                tithing:
+                            </p>
+                            <ul class="study-list">
+                                <li>
+                                    <input
+                                        type="checkbox"
+                                        id="verse1"
+                                        onchange="updateProgress()"
+                                    />
+                                    <label for="verse1">Genesis 14:18-20</label>
+                                    <button
+                                        onclick="showBibleVersions('Genesis 14:18-20')"
+                                        class="verse-btn"
+                                    >
+                                        Read
+                                    </button>
+                                </li>
+                                <li>
+                                    <input
+                                        type="checkbox"
+                                        id="verse2"
+                                        onchange="updateProgress()"
+                                    />
+                                    <label for="verse2">Proverbs 3:9-10</label>
+                                    <button
+                                        onclick="showBibleVersions('Proverbs 3:9-10')"
+                                        class="verse-btn"
+                                    >
+                                        Read
+                                    </button>
+                                </li>
+                                <li>
+                                    <input
+                                        type="checkbox"
+                                        id="verse3"
+                                        onchange="updateProgress()"
+                                    />
+                                    <label for="verse3"
+                                        >2 Corinthians 9:6-7</label
+                                    >
+                                    <button
+                                        onclick="showBibleVersions('2 Corinthians 9:6-7')"
+                                        class="verse-btn"
+                                    >
+                                        Read
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                    // Initialize chart
+                    const ctx = document
+                        .getElementById("tithingChart")
+                        .getContext("2d");
+                    const tithingChart = new Chart(ctx, {
+                        type: "bar",
+                        data: {
+                            labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+                            datasets: [
+                                {
+                                    label: "Tithing Progress",
+                                    data: [0, 0, 0, 0],
+                                    backgroundColor: "#4a6da7",
+                                    borderColor: "#4a6da7",
+                                    borderWidth: 1,
+                                },
+                            ],
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    max: 1,
+                                },
+                            },
+                        },
+                    });
+
+                    // Update progress bar and chart
+                    function updateProgress() {
+                        const totalItems = 7; // 4 weeks + 3 verses
+                        const checkedItems = document.querySelectorAll(
+                            '#assignment input[type="checkbox"]:checked'
+                        ).length;
+                        const progressPercent =
+                            (checkedItems / totalItems) * 100;
+
+                        document.getElementById(
+                            "assignmentProgress"
+                        ).style.width = `${progressPercent}%`;
+                        document.getElementById(
+                            "progressText"
+                        ).textContent = `${Math.round(
+                            progressPercent
+                        )}% Complete`;
+
+                        updateChart();
+                    }
+
+                    // Update chart data
+                    function updateChart() {
+                        const weeks = ["week1", "week2", "week3", "week4"];
+                        const newData = weeks.map((week) =>
+                            document.getElementById(week).checked ? 1 : 0
+                        );
+
+                        tithingChart.data.datasets[0].data = newData;
+                        tithingChart.update();
+                    }
+
+                    // Save reflection
+                    function saveReflection() {
+                        const reflection =
+                            document.getElementById("reflectionText").value;
+                        localStorage.setItem("tithingReflection", reflection);
+                        showToast("Reflection saved successfully! 📝");
+                    }
+
+                    // Load saved reflection on page load
+                    document.addEventListener("DOMContentLoaded", () => {
+                        const savedReflection =
+                            localStorage.getItem("tithingReflection");
+                        if (savedReflection) {
+                            document.getElementById("reflectionText").value =
+                                savedReflection;
+                        }
+                    });
+                </script>
+            </div>
+
+            <!-- Add this modal for Bible versions -->
+            <div id="verse-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 id="verse-reference"></h2>
+                    <div class="version-tab">
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('KJV')"
+                        >
+                            KJV
+                        </button>
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('NKJV')"
+                        >
+                            NKJV
+                        </button>
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('NIV')"
+                        >
+                            NIV
+                        </button>
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('ESV')"
+                        >
+                            ESV
+                        </button>
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('AMP')"
+                        >
+                            AMP
+                        </button>
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('NLT')"
+                        >
+                            NLT
+                        </button>
+                    </div>
+                    <div id="verse-text"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Replace your existing font controls with this -->
+        <div class="font-controls">
+            <button
+                onclick="adjustFontSize(-1)"
+                aria-label="Decrease font size"
+            >
+                <i class="fas fa-minus"></i>
+            </button>
+            <span class="font-size">16px</span>
+            <button onclick="adjustFontSize(1)" aria-label="Increase font size">
+                <i class="fas fa-plus"></i>
+            </button>
+            <select
+                class="font-family-select"
+                onchange="changeFont(this.value)"
+            >
+                <option value="'Segoe UI', sans-serif">Default</option>
+                <option value="Arial, sans-serif">Arial</option>
+                <option value="Georgia, serif">Georgia</option>
+                <option value="'Times New Roman', serif">
+                    Times New Roman
+                </option>
+                <option value="'Comic Sans MS', cursive">Comic Sans</option>
+            </select>
+        </div>
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"
+        ></script>
+
+        <script>
+            $(function () {
+                let tab = $("tab");
+                tab.click(function () {
+                    alert;
+                });
+            });
+        </script>
+
+        <script>
+            // Loading Screen
+            window.addEventListener("load", function () {
+                setTimeout(() => {
+                    document.querySelector(".loader-container").style.display =
+                        "none";
+                }, 2000);
+            });
+
+            // // Tab Functionality
+            function openTab(tabName) {
+                const tabContents =
+                    document.getElementsByClassName("tab-content");
+                const tabButtons = document.getElementsByClassName("tab-btn");
+                const spinner = document.getElementById("tab-spinner");
+
+                for (let content of tabContents) {
+                    content.classList.remove("active");
+                    content.style.display = "none";
+                }
+
+                for (let button of tabButtons) {
+                    button.classList.remove("active");
+                }
+
+                document.getElementById(tabName).classList.add("active");
+                event.currentTarget.classList.add("active");
+
+                spinner.style.display = "flex";
+
+                setTimeout(() => {
+                    // Hide spinner
+                    spinner.style.display = "none";
+
+                    // Show selected tab content
+                    const selectedTab = document.getElementById(tabName);
+                    selectedTab.style.display = "block";
+
+                    // Trigger a reflow before adding the active class for animation
+                    void selectedTab.offsetWidth;
+
+                    // Add active class to fade in the content
+                    selectedTab.classList.add("active");
+
+                    // Update progress if needed
+                    updateProgress();
+                }, 800); // Adjust loading time as needed (800ms)
+            }
+
+            // Theme Toggle
+
+            function toggleTheme() {
+                document.body.classList.toggle("dark-mode");
+                const icon = document.querySelector(".theme-toggle i");
+                icon.classList.toggle("fa-moon");
+                icon.classList.toggle("fa-sun");
+            }
+
+            // Add these functions to your existing JavaScript
+
+            function showBibleVersions(reference) {
+                const modal = document.getElementById("verse-modal");
+                const verseRef = document.getElementById("verse-reference");
+                verseRef.textContent = reference;
+                modal.style.display = "block";
+                document.body.classList.add("modal-open");
+                showVersion(preferredVersion);
+            }
+
+            const bibleVerses = {
+                "Malachi 3:10-12": {
+                    KJV: `10 Bring ye all the tithes into the storehouse, that there may be meat in mine house, and prove me now herewith, saith the LORD of hosts, if I will not open you the windows of heaven, and pour you out a blessing, that there shall not be room enough to receive it.
+                    11 And I will rebuke the devourer for your sakes, and he shall not destroy the fruits of your ground; neither shall your vine cast her fruit before the time in the field, saith the LORD of hosts.
+                    12 And all nations shall call you blessed: for ye shall be a delightsome land, saith the LORD of hosts.`,
+                    NKJV: `10 Bring all the tithes into the storehouse, that there may be food in My house, and try Me now in this," says the LORD of hosts, "If I will not open for you the windows of heaven and pour out for you such blessing that there will not be room enough to receive it.
+                    11 And I will rebuke the devourer for your sakes, so that he will not destroy the fruit of your ground, nor shall the vine fail to bear fruit for you in the field," says the LORD of hosts;
+                    12 "And all nations will call you blessed, for you will be a delightful land," says the LORD of hosts.`,
+                    NIV: `10 Bring the whole tithe into the storehouse, that there may be food in my house. Test me in this," says the LORD Almighty, "and see if I will not throw open the floodgates of heaven and pour out so much blessing that there will not be room enough to store it.
+                    11 I will prevent pests from devouring your crops, and the vines in your fields will not drop their fruit before it is ripe," says the LORD Almighty.
+                    12 "Then all the nations will call you blessed, for yours will be a delightful land," says the LORD Almighty.`,
+                    ESV: `10 Bring the full tithe into the storehouse, that there may be food in my house. And thereby put me to the test, says the LORD of hosts, if I will not open the windows of heaven for you and pour down for you a blessing until there is no more need.
+                    11 I will rebuke the devourer for you, so that it will not destroy the fruits of your soil, and your vine in the field shall not fail to bear, says the LORD of hosts.
+                    12 Then all nations will call you blessed, for you will be a land of delight, says the LORD of hosts.`,
+                    AMP: `10 Bring all the tithes (the tenth) into the storehouse, that there may be food in My house, and test Me now in this," says the LORD of hosts, "if I will not open for you the windows of heaven and pour out for you [so great] a blessing until there is no more room to receive it.
+                    11 Then I will rebuke the devourer (insects, plague) for your sake and he will not destroy the fruits of your ground, nor will your vine in the field drop its grapes [before harvest]," says the LORD of hosts.
+                    12 "All nations shall call you happy and blessed, for you shall be a land of delight," says the LORD of hosts.`,
+                    NLT: `10 Bring all the tithes into the storehouse so there will be enough food in my Temple. If you do," says the LORD of Heaven's Armies, "I will open the windows of heaven for you. I will pour out a blessing so great you won't have enough room to take it in! Try it! Put me to the test!
+                    11 Your crops will be abundant, for I will guard them from insects and disease. Your grapes will not fall from the vine before they are ripe," says the LORD of Heaven's Armies.
+                    12 "Then all nations will call you blessed, for your land will be such a delight," says the LORD of Heaven's Armies.`,
+                },
+
+                "Isaiah 1:19": {
+                    KJV: `If ye be willing and obedient, ye shall eat the good of the land:`,
+                    NKJV: `If you are willing and obedient, you shall eat the good of the land;`,
+                    NIV: `If you are willing and obedient, you will eat the good things of the land;`,
+                    ESV: `If you are willing and obedient, you shall eat the good of the land;`,
+                    AMP: `If you are willing and obedient, you shall eat the good of the land;`,
+                    NLT: `If you will only obey me, you will have plenty to eat.`,
+                },
+                "Malachi 3:10": {
+                    KJV: `Bring ye all the tithes into the storehouse, that there may be meat in mine house, and prove me now herewith, saith the LORD of hosts, if I will not open you the windows of heaven, and pour you out a blessing, that there shall not be room enough to receive it.`,
+                    NKJV: `Bring all the tithes into the storehouse, that there may be food in My house, and try Me now in this," says the LORD of hosts, "If I will not open for you the windows of heaven and pour out for you such blessing that there will not be room enough to receive it.`,
+                    NIV: `Bring the whole tithe into the storehouse, that there may be food in my house. Test me in this," says the LORD Almighty, "and see if I will not throw open the floodgates of heaven and pour out so much blessing that there will not be room enough to store it.`,
+                    ESV: `Bring the full tithe into the storehouse, that there may be food in my house. And thereby put me to the test, says the LORD of hosts, if I will not open the windows of heaven for you and pour down for you a blessing until there is no more need.`,
+                    AMP: `Bring all the tithes (the tenth) into the storehouse, that there may be food in My house, and test Me now in this," says the LORD of hosts, "if I will not open for you the windows of heaven and pour out for you [so great] a blessing until there is no more room to receive it.`,
+                    NLT: `Bring all the tithes into the storehouse so there will be enough food in my Temple. If you do," says the LORD of Heaven's Armies, "I will open the windows of heaven for you. I will pour out a blessing so great you won't have enough room to take it in! Try it! Put me to the test!`,
+                },
+                "Malachi 3:11": {
+                    KJV: "And I will rebuke the devourer for your sakes, and he shall not destroy the fruits of your ground; neither shall your vine cast her fruit before the time in the field, saith the LORD of hosts.",
+                    NKJV: 'And I will rebuke the devourer for your sakes, so that he will not destroy the fruit of your ground, nor shall the vine fail to bear fruit for you in the field," says the LORD of hosts;',
+                    NIV: 'I will prevent pests from devouring your crops, and the vines in your fields will not drop their fruit before it is ripe," says the LORD Almighty.',
+                    ESV: "I will rebuke the devourer for you, so that it will not destroy the fruits of your soil, and your vine in the field shall not fail to bear, says the LORD of hosts.",
+                    AMP: 'Then I will rebuke the devourer (insects, plague) for your sake and he will not destroy the fruits of your ground, nor will your vine in the field drop its grapes [before harvest]," says the LORD of hosts.',
+                    NLT: "Your crops will be abundant, for I will guard them from insects and disease. Your grapes will not fall from the vine before they are ripe,\" says the LORD of Heaven's Armies.",
+                },
+                "Malachi 3:12": {
+                    KJV: "And all nations shall call you blessed: for ye shall be a delightsome land, saith the LORD of hosts.",
+                    NKJV: 'And all nations will call you blessed, for you will be a delightful land," says the LORD of hosts.',
+                    NIV: 'Then all the nations will call you blessed, for yours will be a delightful land," says the LORD Almighty.',
+                    ESV: "Then all nations will call you blessed, for you will be a land of delight, says the LORD of hosts.",
+                    AMP: '"All nations shall call you happy and blessed, for you shall be a land of delight," says the LORD of hosts.',
+                    NLT: '"Then all nations will call you blessed, for your land will be such a delight," says the LORD of Heaven\'s Armies.',
+                },
+                "Genesis 14:18-20": {
+                    KJV: "18 And Melchizedek king of Salem brought forth bread and wine: and he was the priest of the most high God. 19 And he blessed him, and said, Blessed be Abram of the most high God, possessor of heaven and earth: 20 And blessed be the most high God, which hath delivered thine enemies into thy hand. And he gave him tithes of all.",
+                    NKJV: '18 Then Melchizedek king of Salem brought out bread and wine; he was the priest of God Most High. 19 And he blessed him and said: "Blessed be Abram of God Most High, Possessor of heaven and earth; 20 And blessed be God Most High, Who has delivered your enemies into your hand." And he gave him a tithe of all.',
+                    NIV: '18 Then Melchizedek king of Salem brought out bread and wine. He was priest of God Most High, 19 and he blessed Abram, saying, "Blessed be Abram by God Most High, Creator of heaven and earth. 20 And praise be to God Most High, who delivered your enemies into your hand." Then Abram gave him a tenth of everything.',
+                    ESV: '18 And Melchizedek king of Salem brought out bread and wine. (He was priest of God Most High.) 19 And he blessed him and said, "Blessed be Abram by God Most High, Possessor of heaven and earth; 20 and blessed be God Most High, who has delivered your enemies into your hand!" And Abram gave him a tenth of everything.',
+                    AMP: '18 And Melchizedek king of Salem (ancient Jerusalem) brought out bread and wine [for them]; he was the priest of God Most High. 19 And Melchizedek blessed Abram and said, "Blessed (joyful, favored) be Abram by God Most High, Creator and Possessor of heaven and earth; 20 And blessed, praised, and glorified be God Most High, Who has given your enemies into your hand." And Abram gave him a tenth of all [the spoil].',
+                    NLT: '18 And Melchizedek, the king of Salem and a priest of God Most High, brought Abram some bread and wine. 19 Melchizedek blessed Abram with this blessing: "Blessed be Abram by God Most High, Creator of heaven and earth. 20 And blessed be God Most High, who has defeated your enemies for you." Then Abram gave Melchizedek a tenth of all the goods he had recovered.',
+                },
+                "Proverbs 3:9-10": {
+                    KJV: "9 Honor the LORD with thy substance, and with the firstfruits of all thine increase: 10 So shall thy barns be filled with plenty, and thy presses shall burst out with new wine.",
+                    NKJV: "9 Honor the LORD with your possessions, And with the firstfruits of all your increase; 10 So your barns will be filled with plenty, And your vats will overflow with new wine.",
+                    NIV: "9 Honor the LORD with your wealth, with the firstfruits of all your crops; 10 then your barns will be filled to overflowing, and your vats will brim over with new wine.",
+                    ESV: "9 Honor the LORD with your wealth and with the firstfruits of all your produce; 10 then your barns will be filled with plenty, and your vats will be bursting with wine.",
+                    AMP: "9 Honor the LORD with your wealth And with the first fruits of all your crops (income); 10 Then your barns will be abundantly filled And your vats will overflow with new wine.",
+                    NLT: "9 Honor the LORD with your wealth and with the best part of everything you produce. 10 Then he will fill your barns with grain, and your vats will overflow with good wine.",
+                },
+                "2 Corinthians 9:6-7": {
+                    KJV: "6 But this I say, He which soweth sparingly shall reap also sparingly; and he which soweth bountifully shall reap also bountifully. 7 Every man according as he purposeth in his heart, so let him give; not grudgingly, or of necessity: for God loveth a cheerful giver.",
+                    NKJV: "6 But this I say: He who sows sparingly will also reap sparingly, and he who sows bountifully will also reap bountifully. 7 So let each one give as he purposes in his heart, not grudgingly or of necessity; for God loves a cheerful giver.",
+                    NIV: "6 Remember this: Whoever sows sparingly will also reap sparingly, and whoever sows generously will also reap generously. 7 Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver.",
+                    ESV: "6 The point is this: whoever sows sparingly will also reap sparingly, and whoever sows bountifully will also reap bountifully. 7 Each one must give as he has decided in his heart, not reluctantly or under compulsion, for God loves a cheerful giver.",
+                    AMP: "6 Now [remember] this: he who sows sparingly will also reap sparingly, and he who sows generously [that blessings may come to others] will also reap generously [and be blessed]. 7 Let each one give [thoughtfully and with purpose] just as he has decided in his heart, not grudgingly or under compulsion, for God loves a cheerful giver [and delights in the one whose heart is in his gift].",
+                    NLT: '6 Remember this—a farmer who plants only a few seeds will get a small crop. But the one who plants generously will get a generous crop. 7 You must each decide in your heart how much to give. And don\'t give reluctantly or in response to pressure. "For God loves a person who gives cheerfully."',
+                },
+            };
+
+            // Replace the existing showVersion function
+
+            function showVersion(version) {
+                const reference =
+                    document.getElementById("verse-reference").textContent;
+                const verseText = document.getElementById("verse-text");
+
+                // Show loader
+                verseText.innerHTML =
+                    '<div class="verse-loader"><i class="fas fa-spinner fa-2x"></i></div>';
+
+                // Simulate loading time and show verse
+                setTimeout(() => {
+                    if (bibleVerses[reference]) {
+                        verseText.innerHTML = `<p class="verse-text">${bibleVerses[reference][version]}</p>`;
+                        // Add show class after a brief delay to trigger fade-in
+                        setTimeout(() => {
+                            document
+                                .querySelector(".verse-text")
+                                .classList.add("show");
+                        }, 50);
+                    } else {
+                        verseText.innerHTML =
+                            "<p>Verse not found in database.</p>";
+                    }
+
+                    // Update active button
+                    document.querySelectorAll(".version-btn").forEach((btn) => {
+                        btn.classList.remove("active");
+                        if (btn.textContent === version)
+                            btn.classList.add("active");
+                    });
+                }, 500); // Half second loading time
+            }
+
+            // Close modal when clicking the X or outside
+            document.querySelector(".close").onclick = function () {
+                document.getElementById("verse-modal").style.display = "none";
+                document.body.classList.remove("modal-open");
+            };
+
+            window.onclick = function (event) {
+                const modal = document.getElementById("verse-modal");
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                    document.body.classList.remove("modal-open");
+                }
+            };
+
+            function checkQuiz() {
+                const answers = {
+                    q1: "a", // Malachi 3:10
+                    q2: "b", // Time of Melchizedek and Abraham
+                    q3: "a", // No, it predates the Law of Moses
+                    q4: "c", // Christ
+                    q5: "a", // Hebrews 7:6-8
+                    q6: "a", // To support Melchizedek's priesthood
+                };
+
+                let score = 0;
+                let total = Object.keys(answers).length;
+                let resultsHTML = "<h3>📊 Quiz Results</h3><ul>";
+
+                for (let key in answers) {
+                    const selected = document.querySelector(
+                        `input[name="${key}"]:checked`
+                    );
+                    if (selected) {
+                        if (selected.value === answers[key]) {
+                            score++;
+                            resultsHTML += `<li>Question ${key.slice(
+                                1
+                            )}: ✅ Correct</li>`;
+                        } else {
+                            resultsHTML += `<li>Question ${key.slice(
+                                1
+                            )}: ❌ Incorrect</li>`;
+                        }
+                    } else {
+                        resultsHTML += `<li>Question ${key.slice(
+                            1
+                        )}: ⚠️ Not answered</li>`;
+                    }
+                }
+
+                resultsHTML += `</ul>`;
+
+                // Calculate percentage and add appropriate styling
+                const percentage = Math.round((score / total) * 100);
+                let scoreClass = "";
+                let message = "";
+
+                if (percentage >= 80) {
+                    scoreClass = "score-excellent";
+                    message =
+                        "🎉 Excellent work! You have a strong understanding of biblical tithing.";
+                } else if (percentage >= 60) {
+                    scoreClass = "score-good";
+                    message =
+                        "👍 Good job! You have a solid foundation, but consider reviewing some concepts.";
+                } else {
+                    scoreClass = "score-needs-improvement";
+                    message =
+                        "📚 Keep studying! Review the lesson materials to strengthen your understanding.";
+                }
+
+                resultsHTML += `<div class="score-summary ${scoreClass}">
+                            <strong>Your Score: ${score} out of ${total} (${percentage}%)</strong>
+                            <br><br>${message}
+                        </div>`;
+
+                const resultsDiv = document.getElementById("quiz-results");
+                resultsDiv.innerHTML = resultsHTML;
+                resultsDiv.classList.add("show");
+                resultsDiv.scrollIntoView({ behavior: "smooth" });
+            }
+
+            let progress = 0;
+            const totalSections = 5; // Number of tabs
+
+            function updateProgress(increment = true) {
+                if (increment) {
+                    progress = Math.min(100, progress + 100 / totalSections);
+                }
+                const progressBar = document.querySelector(".progress");
+                const progressText = document.querySelector(".progress-text");
+                progressBar.style.width = `${progress}%`;
+                progressText.textContent = `${Math.round(progress)}% Complete`;
+
+                if (progress >= 100) {
+                    showToast(
+                        "Congratulations! You've completed the lesson! 🎉"
+                    );
+                }
+            }
+
+            function showToast(message) {
+                const toast = document.createElement("div");
+                toast.className = "toast";
+                toast.textContent = message;
+                document.body.appendChild(toast);
+
+                // Trigger reflow
+                toast.offsetHeight;
+
+                // Show toast
+                toast.style.opacity = "1";
+
+                // Hide after 3 seconds
+                setTimeout(() => {
+                    toast.style.opacity = "0";
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
+
+            // Add interaction tracking to tab switching
+            const originalOpenTab = openTab;
+            openTab = function (tabName) {
+                originalOpenTab(tabName);
+                updateProgress();
+
+                // Add animation to questions
+                if (tabName === "quiz") {
+                    document.querySelectorAll(".question").forEach((q, i) => {
+                        setTimeout(() => q.classList.add("show"), i * 200);
+                    });
+                }
+            };
+
+            // Save progress to localStorage
+            function saveProgress() {
+                localStorage.setItem("lessonProgress", progress);
+                showToast("Progress saved! 💾");
+            }
+
+            // Load saved progress
+            window.addEventListener("load", () => {
+                const savedProgress = localStorage.getItem("lessonProgress");
+                if (savedProgress) {
+                    progress = parseFloat(savedProgress);
+                    updateProgress(false);
+                }
+            });
+
+            // Share functionality
+            function shareLesson() {
+                if (navigator.share) {
+                    navigator
+                        .share({
+                            title: "Sunday School Lesson",
+                            text: "Check out this lesson on Real Christian Clothing!",
+                            url: window.location.href,
+                        })
+                        .then(() => showToast("Shared successfully! 🙌"))
+                        .catch(() => showToast("Sharing failed"));
+                } else {
+                    showToast("Sharing not supported on this device");
+                }
+            }
+
+            // Scroll to top
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                });
+            }
+
+            // Add to your existing JavaScript
+
+            let preferredVersion =
+                localStorage.getItem("preferredVersion") || "KJV";
+
+            function changeDefaultVersion(version) {
+                preferredVersion = version;
+                localStorage.setItem("preferredVersion", version);
+                showVersion(version);
+                showToast(`Default Bible version changed to ${version}`);
+            }
+
+            // Update the showBibleVersions function
+
+            // Load preferred version on startup
+            window.addEventListener("load", () => {
+                const savedVersion = localStorage.getItem("preferredVersion");
+                if (savedVersion) {
+                    preferredVersion = savedVersion;
+                    document.querySelectorAll(".version-btn").forEach((btn) => {
+                        btn.classList.remove("active");
+                        if (btn.textContent === preferredVersion)
+                            btn.classList.add("active");
+                    });
+                }
+            });
+
+            // Add this to your existing <script> section
+            let currentFontSize =
+                parseInt(localStorage.getItem("preferredFontSize")) || 16;
+
+            function adjustFontSize(delta) {
+                // Adjust font size with limits
+                currentFontSize = Math.min(
+                    Math.max(currentFontSize + delta, 12),
+                    24
+                );
+
+                // Update CSS variable
+                document.documentElement.style.setProperty(
+                    "--font-size",
+                    `${currentFontSize}px`
+                );
+
+                // Update display
+                document.querySelector(
+                    ".font-size"
+                ).textContent = `${currentFontSize}px`;
+
+                // Save to localStorage
+                localStorage.setItem("preferredFontSize", currentFontSize);
+            }
+
+            // Initialize font size on page load
+            window.addEventListener("load", () => {
+                // Set initial font size
+                document.documentElement.style.setProperty(
+                    "--font-size",
+                    `${currentFontSize}px`
+                );
+                document.querySelector(
+                    ".font-size"
+                ).textContent = `${currentFontSize}px`;
+
+                // Add scalable-text class to all text elements
+                document
+                    .querySelectorAll(
+                        "p, h1, h2, h3, h4, h5, h6, li, blockquote, label, button, input, textarea, .tab-btn, .verse-text, .options label"
+                    )
+                    .forEach((el) => el.classList.add("scalable-text"));
+            });
+
+            function changeFont(fontFamily) {
+                document.body.style.fontFamily = fontFamily;
+                // Save preference
+                localStorage.setItem("preferredFont", fontFamily);
+            }
+
+            // Load saved preferences
+            window.addEventListener("load", () => {
+                const savedFontSize = localStorage.getItem("preferredFontSize");
+                if (savedFontSize) {
+                    currentFontSize = parseInt(savedFontSize);
+                    adjustFontSize(0);
+                }
+
+                const savedFont = localStorage.getItem("preferredFont");
+                if (savedFont) {
+                    document.body.style.fontFamily = savedFont;
+                    document.querySelector(".font-family-select").value =
+                        savedFont;
+                }
+            });
+
+            // Add CSS Variable for scaling
+            document.documentElement.style.setProperty(
+                "--content-scale",
+                "100%"
+            );
+
+            // Update content elements to use the scale
+            document
+                .querySelectorAll(
+                    ".tab-content, .memory-verse, .reflection-notes"
+                )
+                .forEach((el) => {
+                    el.classList.add("adjustable-content");
+                    el.style.fontSize =
+                        "calc(1rem * var(--content-scale) / 100)";
+                });
+
+            // Add to your existing <script> section
+            document.addEventListener("DOMContentLoaded", () => {
+                // Love Meter functionality
+                const loveSlider = document.querySelector(".love-slider");
+                const ratingValue = document.querySelector(".rating-value");
+                const ratingFeedback =
+                    document.querySelector(".rating-feedback");
+
+                if (loveSlider) {
+                    loveSlider.addEventListener("input", () => {
+                        const value = loveSlider.value;
+                        ratingValue.textContent = `${value}/10`;
+
+                        // Update feedback based on rating
+                        const feedback =
+                            value >= 8
+                                ? "Excellent! Keep showing God's love!"
+                                : value >= 6
+                                ? "Good effort! There's room to grow."
+                                : "Consider ways to show more love tomorrow.";
+                        ratingFeedback.textContent = feedback;
+                    });
+                }
+
+                // Action Items functionality
+                const addActionBtn = document.querySelector(".add-action-btn");
+                if (addActionBtn) {
+                    addActionBtn.addEventListener("click", () => {
+                        const action = prompt("Enter your custom love action:");
+                        if (action) {
+                            const actionItems =
+                                document.querySelector(".action-items");
+                            const newAction = document.createElement("div");
+                            newAction.className = "action-item";
+                            newAction.innerHTML = `
+                                                                                <input type="checkbox" id="action${Date.now()}">
+                                                                                <label for="action${Date.now()}">${action}</label>
+                                                                            `;
+                            actionItems.insertBefore(newAction, addActionBtn);
+                        }
+                    });
+                }
+
+                // Journal Prompts functionality
+                const prompts = [
+                    "How did you demonstrate God's love today?",
+                    "What challenges did you face in showing love?",
+                    "How can you better express God's love tomorrow?",
+                ];
+                let currentPrompt = 0;
+
+                const updatePrompt = () => {
+                    const promptElement = document.querySelector(".prompt p");
+                    const promptCounter =
+                        document.querySelector(".prompt-counter");
+                    if (promptElement) {
+                        promptElement.textContent = prompts[currentPrompt];
+                        promptCounter.textContent = `${currentPrompt + 1}/${
+                            prompts.length
+                        }`;
+                    }
+                };
+
+                const nextPromptBtn = document.querySelector(".next-prompt");
+                const prevPromptBtn = document.querySelector(".prev-prompt");
+
+                if (nextPromptBtn && prevPromptBtn) {
+                    nextPromptBtn.addEventListener("click", () => {
+                        if (currentPrompt < prompts.length - 1) {
+                            currentPrompt++;
+                            updatePrompt();
+                            prevPromptBtn.disabled = false;
+                            if (currentPrompt === prompts.length - 1) {
+                                nextPromptBtn.disabled = true;
+                            }
+                        }
+                    });
+
+                    prevPromptBtn.addEventListener("click", () => {
+                        if (currentPrompt > 0) {
+                            currentPrompt--;
+                            updatePrompt();
+                            nextPromptBtn.disabled = false;
+                            if (currentPrompt === 0) {
+                                prevPromptBtn.disabled = true;
+                            }
+                        }
+                    });
+                }
+
+                // Commitment functionality
+                const saveCommitmentBtn =
+                    document.querySelector(".save-commitment");
+                const commitmentInput =
+                    document.querySelector(".commitment-input");
+                const commitmentList =
+                    document.querySelector(".commitment-list");
+
+                if (saveCommitmentBtn && commitmentInput && commitmentList) {
+                    // Load saved commitments
+                    const savedCommitments = JSON.parse(
+                        localStorage.getItem("commitments") || "[]"
+                    );
+                    savedCommitments.forEach((commitment) => {
+                        const li = document.createElement("li");
+                        li.textContent = commitment;
+                        commitmentList.appendChild(li);
+                    });
+
+                    saveCommitmentBtn.addEventListener("click", () => {
+                        const commitment = commitmentInput.value.trim();
+                        if (commitment) {
+                            const li = document.createElement("li");
+                            li.textContent = commitment;
+                            commitmentList.appendChild(li);
+
+                            // Save to localStorage
+                            const commitments = JSON.parse(
+                                localStorage.getItem("commitments") || "[]"
+                            );
+                            commitments.push(commitment);
+                            localStorage.setItem(
+                                "commitments",
+                                JSON.stringify(commitments)
+                            );
+
+                            commitmentInput.value = "";
+                            showToast("Commitment saved! 🙏");
+                        }
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>
